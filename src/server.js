@@ -31,7 +31,7 @@ app.get('/api/users/:userId/cart', async (req, res) => {
     const products = await db.collection('products').find({}).toArray()
     const cartItemIds = user.cartItems
     const cartItems = cartItemIds.map(id =>
-        products.find(products => product.id === id))
+        products.find(products => products.id === id))
     res.status(200).json(cartItems)
     client.close()
 })
@@ -43,7 +43,7 @@ app.get('/api/products/:productId', async (req, res) => {
         { useNewUrlParser: true, useUnifiedTopology: true },
     )
     const db = client.db('linkding-vue-course')
-    const product = await db.collection('produts').findOne({ id: productId })
+    const product = await db.collection('products').findOne({ id: productId })
 
     if (product) {
         res.status(200).json(product)
@@ -85,7 +85,7 @@ app.delete('/api/users/:userId/cart/:productId', async (req, res) => {
     })
     const user = await db.collection('users').findOne({ id: userId })
     const products = await db.collection('products').find({}).toArray()
-    const cartItemIds = user.cartItemIds
+    const cartItemIds = user.cartItems
     const cartItems = cartItemIds.map(id =>
         products.find(product => product.id === id))
     res.status(200).json(cartItems)
