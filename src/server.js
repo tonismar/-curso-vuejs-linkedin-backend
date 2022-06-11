@@ -39,6 +39,7 @@ app.get('/api/users/:userId/cart', async (req, res) => {
     const cartItems = cartItemIds.map(id =>
         products.find(products => products.id === id))
     res.status(200).json(cartItems)
+
     client.close()
 })
 
